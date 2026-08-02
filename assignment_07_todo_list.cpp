@@ -62,7 +62,7 @@ void viewTasks(const vector<string>& tasks) {
     }
 
     cout << "Your Tasks:" << endl;
-    for (int i = 0; i < tasks.size(); i++) {
+    for (size_t i = 0; i < tasks.size(); i++) {
         cout << (i + 1) << ". " << tasks[i] << endl;
     }
 }
