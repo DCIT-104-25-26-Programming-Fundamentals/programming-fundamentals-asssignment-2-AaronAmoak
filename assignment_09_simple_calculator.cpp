@@ -11,46 +11,13 @@
 // OPERATIONS YOUR CALCULATOR MUST SUPPORT
 // -----------------------------------------------------------------------------
 //
-//   1. Addition          ( + )    e.g.  10 + 3  =  13
-//   2. Subtraction       ( - )    e.g.  10 - 3  =  7
-//   3. Multiplication    ( * )    e.g.  10 * 3  =  30
-//   4. Division          ( / )    e.g.  10 / 3  =  3.33
-//   5. Modulus           ( % )    e.g.  10 % 3  =  1  (remainder)
-//   6. Exponentiation    ( ^ )    e.g.  2 ^ 8   =  256
+//   1. Addition          ( + )
+//   2. Subtraction       ( - )
+//   3. Multiplication    ( * )
+//   4. Division          ( / )
+//   5. Modulus           ( % )
+//   6. Exponentiation    ( ^ )
 //   7. Quit
-//
-// -----------------------------------------------------------------------------
-// HOW THE MENU SHOULD LOOK
-// -----------------------------------------------------------------------------
-//
-//   ============================
-//        SIMPLE CALCULATOR
-//   ============================
-//   1. Addition
-//   2. Subtraction
-//   3. Multiplication
-//   4. Division
-//   5. Modulus
-//   6. Exponentiation
-//   7. Quit
-//   Select an operation (1-7):
-//
-// -----------------------------------------------------------------------------
-// EXPECTED INTERACTION EXAMPLE
-// -----------------------------------------------------------------------------
-//
-//   Select an operation (1-7): 4
-//   Enter first number : 10
-//   Enter second number: 3
-//   Result: 10 / 3 = 3.33
-//
-//   Select an operation (1-7): 4
-//   Enter first number : 5
-//   Enter second number: 0
-//   Error: Cannot divide by zero.
-//
-//   Select an operation (1-7): 7
-//   Goodbye!
 //
 // -----------------------------------------------------------------------------
 // REQUIREMENTS
@@ -63,9 +30,6 @@
 // - Handle invalid menu choices gracefully.
 // - For exponentiation use a loop or the pow() function from <cmath>.
 //
-
-// =============================================================================
-// YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
 #include <iostream>
@@ -73,3 +37,106 @@
 #include <cmath>
 using namespace std;
 
+double addNumbers(double a, double b) {
+    return a + b;
+}
+
+double subtractNumbers(double a, double b) {
+    return a - b;
+}
+
+double multiplyNumbers(double a, double b) {
+    return a * b;
+}
+
+double divideNumbers(double a, double b) {
+    return a / b;
+}
+
+double modulusNumbers(double a, double b) {
+    return fmod(a, b);
+}
+
+double powerNumbers(double base, double exponent) {
+    return pow(base, exponent);
+}
+
+void printMenu() {
+    cout << "\n============================" << endl;
+    cout << "     SIMPLE CALCULATOR" << endl;
+    cout << "============================" << endl;
+    cout << "1. Addition" << endl;
+    cout << "2. Subtraction" << endl;
+    cout << "3. Multiplication" << endl;
+    cout << "4. Division" << endl;
+    cout << "5. Modulus" << endl;
+    cout << "6. Exponentiation" << endl;
+    cout << "7. Quit" << endl;
+    cout << "Select an operation (1-7): ";
+}
+
+int main() {
+    int choice;
+    bool running = true;
+
+    while (running) {
+        printMenu();
+        cin >> choice;
+
+        if (choice == 7) {
+            cout << "Goodbye!" << endl;
+            running = false;
+            continue;
+        }
+
+        if (choice < 1 || choice > 7) {
+            cout << "Error: Invalid choice. Please select 1-7." << endl;
+            continue;
+        }
+
+        double a, b, result;
+        cout << "Enter first number : ";
+        cin >> a;
+        cout << "Enter second number: ";
+        cin >> b;
+
+        cout << fixed << setprecision(2);
+
+        switch (choice) {
+            case 1:
+                result = addNumbers(a, b);
+                cout << "Result: " << a << " + " << b << " = " << result << endl;
+                break;
+            case 2:
+                result = subtractNumbers(a, b);
+                cout << "Result: " << a << " - " << b << " = " << result << endl;
+                break;
+            case 3:
+                result = multiplyNumbers(a, b);
+                cout << "Result: " << a << " * " << b << " = " << result << endl;
+                break;
+            case 4:
+                if (b == 0) {
+                    cout << "Error: Cannot divide by zero." << endl;
+                } else {
+                    result = divideNumbers(a, b);
+                    cout << "Result: " << a << " / " << b << " = " << result << endl;
+                }
+                break;
+            case 5:
+                if (b == 0) {
+                    cout << "Error: Cannot divide by zero." << endl;
+                } else {
+                    result = modulusNumbers(a, b);
+                    cout << "Result: " << a << " % " << b << " = " << result << endl;
+                }
+                break;
+            case 6:
+                result = powerNumbers(a, b);
+                cout << "Result: " << a << " ^ " << b << " = " << result << endl;
+                break;
+        }
+    }
+
+    return 0;
+}
